@@ -4,7 +4,7 @@
     "description": "A simple Error type manager for expressjs apps",
     "main": "dist/ErrorManager.js",
     "scripts": {
-       "test": "mocha --compilers coffee:coffee-script --require should -C"
+        "test": "mocha --compilers coffee:coffee-script --require should -C"
     },
     "repository": "",
     "keywords": [ "error", "expressjs" ] , 
