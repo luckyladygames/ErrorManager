@@ -9,8 +9,9 @@ in actual real world usage.
 
 Example Usage
 -------------
+It's Coffeescript:
 
-    ErrorManager = require "ErrorManager"
+    ErrorManager = require "error-manager"
    
     # ==================== 
     # Create a new types of errors usable in the application
@@ -37,3 +38,9 @@ Example Usage
         res.send "Oh snap! The DB blew up."
 
     # ... more error handling middle ware
+
+Installation
+------------
+
+It is meant to be installed as part of your `package.json` via NPM. Just 
+add a `"error-manager": "latest"` to the `dependencies` section.
