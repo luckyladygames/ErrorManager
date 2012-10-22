@@ -11,12 +11,16 @@ Example Usage
 -------------
 
     Errors = require "ErrorManager"
-    
-    # this will create a new type of error usable in the application
+   
+    # ==================== 
+    # Create a new types of errors usable in the application
+    # ==================== 
     Errors.create "MyCustomError"
     Errors.create "DatabaseBlewUp"
-    
-    # create a custom express error handling middleware 
+   
+    # ==================== 
+    # Create a custom express error handling middleware 
+    # ==================== 
     app.use (err, req, res, next) ->
         # errors can be checked  using instanceof
         if ! err instanceof Errors.MyCustomError
@@ -26,7 +30,10 @@ Example Usage
 
     app.use (err, req, res, next) ->
         # errors can also be checked with a is(), which is injected by ErrorManager
-        return next(err) unless err.is Errors.DatabaseBlewUp
+        # into the Error object's prototype
+        if err.is(Errors.DatabaseBlewUp) == false
+            return next(err)
+
         res.send "Oh snap! The DB blew up."
 
     # ... more error handling middle ware
