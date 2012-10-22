@@ -10,20 +10,20 @@ in actual real world usage.
 Example Usage
 -------------
 
-    Errors = require "ErrorManager"
+    ErrorManager = require "ErrorManager"
    
     # ==================== 
     # Create a new types of errors usable in the application
     # ==================== 
-    Errors.create "MyCustomError"
-    Errors.create "DatabaseBlewUp"
+    ErrorManager.create "MyCustomError"
+    ErrorManager.create "DatabaseBlewUp"
    
     # ==================== 
     # Create a custom express error handling middleware 
     # ==================== 
     app.use (err, req, res, next) ->
         # errors can be checked  using instanceof
-        if ! err instanceof Errors.MyCustomError
+        if ! err instanceof ErrorManager.MyCustomError
             return next(err)
 
         res.send "Got MyCustomError"
@@ -31,7 +31,7 @@ Example Usage
     app.use (err, req, res, next) ->
         # errors can also be checked with a is(), which is injected by ErrorManager
         # into the Error object's prototype
-        if err.is(Errors.DatabaseBlewUp) == false
+        if err.is(ErrorManager.DatabaseBlewUp) == false
             return next(err)
 
         res.send "Oh snap! The DB blew up."

@@ -1,0 +1,21 @@
+{
+    "name": "ErrorManager",
+    "version": "1.0.0",
+    "description": "A simple Error type manager for expressjs apps",
+    "main": "dist/ErrorManager.js",
+    "scripts": {
+       "test": "mocha --compilers coffee:coffee-script --require should -C"
+    },
+    "repository": "",
+    "keywords": [ "error", "expressjs" ] , 
+    "dependencies": {
+        "coffee-script" : "*"
+    }
+    , "devDependencies": {
+          "mocha" : "*"
+        , "should": "*"
+        , "docco" : "*" 
+    }
+    ,"author": "Benson Wong <mostlygeek@gmail.com>"
+    ,"license": "MIT"
+}
