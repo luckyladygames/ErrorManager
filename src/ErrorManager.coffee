@@ -9,10 +9,11 @@ util = require "util"
 # All errors extend the BaseError 
 BaseError = (message, constr) ->
     Error.captureStackTrace @, if constr then constr else @
-    @message = if message then message else "Error"
+    @message = message if message?
 
 util.inherits BaseError, Error
 BaseError.prototype.name = "BaseError"
+BaseError.prototype.message = "Error"
 
 # Global Container for ErrorManager within the system
 ErrorManager = 
@@ -28,7 +29,7 @@ ErrorManager =
         NewError = (message) ->
             NewError.super_.call @, message, @constructor
 
-        defaultMessage = "Error: #{name} occured" if defaultMessage == ""
+        defaultMessage = "#{name} error" if defaultMessage == ""
         util.inherits NewError, base
         NewError.prototype.name = name
         NewError.prototype.message = defaultMessage

@@ -6,12 +6,16 @@
 
   BaseError = function(message, constr) {
     Error.captureStackTrace(this, constr ? constr : this);
-    return this.message = message ? message : "Error";
+    if (message != null) {
+      return this.message = message;
+    }
   };
 
   util.inherits(BaseError, Error);
 
   BaseError.prototype.name = "BaseError";
+
+  BaseError.prototype.message = "Error";
 
   ErrorManager = {
     BaseError: BaseError,
@@ -28,7 +32,7 @@
         return NewError.super_.call(this, message, this.constructor);
       };
       if (defaultMessage === "") {
-        defaultMessage = "Error: " + name + " occured";
+        defaultMessage = "" + name + " error";
       }
       util.inherits(NewError, base);
       NewError.prototype.name = name;

@@ -24,3 +24,10 @@ describe "Errors", ->
         err = new TestCompare 
         (err instanceof ErrorManager.TestCompare).should.be.true
 
+    it "should have the correct default message", ->
+        MyError = ErrorManager.create("MyError", "TEST1")
+        err = new MyError
+        err2 = new MyError("TEST2")
+
+        err.message.should.equal 'TEST1'
+        err2.message.should.equal 'TEST2'
