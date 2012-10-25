@@ -1,6 +1,6 @@
 {
     "name": "error-manager",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "A simple Error type manager for expressjs apps",
     "main": "dist/ErrorManager.js",
     "scripts": {

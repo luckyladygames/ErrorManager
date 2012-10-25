@@ -8,15 +8,14 @@ describe "ErrorManager.create", ->
         ErrorManager.create "NewError"
         ErrorManager.should.have.property "NewError"
 
-    it "should create a new member that can create a new object", ->
+    it "should create a new member that can be used with `new`", ->
         ErrorManager.create "Test2"
         newError = new ErrorManager.Test2 "I am new error 2"
         newError.should.have.property "message", "I am new error 2"
 
-describe "Error", ->
-    it "should have an is() method", ->
-        Error.prototype.should.have.property "is"
-        (typeof Error.prototype.is).should.equal "function"
+    it "should also add new errors to the `errorList` property", ->
+        ErrorManager.should.have.property "errorList"
+        ErrorManager.errorList.should.be.instanceOf Array
 
 describe "Errors", ->
 
@@ -24,8 +23,4 @@ describe "Errors", ->
     it "should be comparable with instanceof", ->
         err = new TestCompare 
         (err instanceof ErrorManager.TestCompare).should.be.true
-    it "should be comparable with is() method", ->
-        err = new TestCompare
-        (err.is ErrorManager.TestCompare).should.be.true
-
 

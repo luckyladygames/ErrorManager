@@ -6,11 +6,6 @@
 #
 util = require "util"
 
-# yes, I'm a bad ass and I'm injecting a `is()` handler into this mofo.
-# so we can use `err.is(ErrorManager.Application)` 
-Error.prototype.is = (toCheck) ->
-    @ instanceof toCheck
-
 # All errors extend the BaseError 
 BaseError = (message, constr) ->
     Error.captureStackTrace @, if constr then constr else @
@@ -22,6 +17,9 @@ BaseError.prototype.name = "BaseError"
 # Global Container for ErrorManager within the system
 ErrorManager = 
     BaseError: BaseError
+
+    # for easy iteration through errors for checking
+    errorList: []
     
     # this creates a new type of error within the system
     # and adds it to the global ErrorManager object to be shared
@@ -35,7 +33,13 @@ ErrorManager =
         NewError.prototype.name = name
         NewError.prototype.message = defaultMessage
        
+        if @[name]?
+            throw new Error("Error: #{name} already exists")
+        
+        # We make it easy to reference in code
         @[name] = NewError
+        @errorList.push NewError
+
         NewError
 
 module.exports = ErrorManager
