@@ -4,10 +4,6 @@
 
   util = require("util");
 
-  Error.prototype.is = function(toCheck) {
-    return this instanceof toCheck;
-  };
-
   BaseError = function(message, constr) {
     Error.captureStackTrace(this, constr ? constr : this);
     return this.message = message ? message : "Error";
@@ -19,6 +15,7 @@
 
   ErrorManager = {
     BaseError: BaseError,
+    errorList: [],
     create: function(name, defaultMessage, base) {
       var NewError;
       if (defaultMessage == null) {
@@ -36,7 +33,11 @@
       util.inherits(NewError, base);
       NewError.prototype.name = name;
       NewError.prototype.message = defaultMessage;
+      if (this[name] != null) {
+        throw new Error("Error: " + name + " already exists");
+      }
       this[name] = NewError;
+      this.errorList.push(NewError);
       return NewError;
     }
   };
