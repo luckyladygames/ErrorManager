@@ -29,14 +29,6 @@ It's Coffeescript:
 
         res.send "Got MyCustomError"
 
-    app.use (err, req, res, next) ->
-        # errors can also be checked with a is(), which is injected by ErrorManager
-        # into the Error object's prototype
-        if err.is(ErrorManager.DatabaseBlewUp) == false
-            return next(err)
-
-        res.send "Oh snap! The DB blew up."
-
     # ... more error handling middle ware
 
 Installation
