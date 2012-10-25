@@ -1,4 +1,4 @@
-ErrorManager = require "../src/ErrorManager"
+ErrorManager = require "../dist/ErrorManager"
 
 describe "ErrorManager.create", ->
     it "should exist", ->
